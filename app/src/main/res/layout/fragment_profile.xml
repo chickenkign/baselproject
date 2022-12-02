@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper"
-    tools:context=".login">
+    tools:context=".profile">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Username"
+            android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -38,15 +38,22 @@
             android:hint="Password"
             android:inputType="textPassword" />
 
-        <CheckBox
+        <EditText
+            android:id="@+id/ETPusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Keep me Signed in "
-            android:textColor="#FFFBF6"
-            android:hint="#FFFBF6"
-            android:layout_marginTop="15dp"
-            android:buttonTint="#FFFBF6"
-            />
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/ETPPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="phone number"
+            android:inputType="textPassword" />
+
 
         <Button
             android:id="@+id/BTPSignIn"
@@ -54,23 +61,9 @@
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/custombutton2"
-            android:text="Signin"
+            android:text="Done"
             android:textAllCaps="false"
             android:textColor="#FFFBF6" />
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="#3fff"
-            android:layout_marginTop="15dp"/>
-
-        <TextView
-            android:id="@+id/ForgotPasswordLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Forget Pasword"
-            android:textColor="#FFFBF6"
-            android:textSize="18dp" />
 
     </LinearLayout>
 

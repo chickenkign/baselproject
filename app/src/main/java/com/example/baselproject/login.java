@@ -72,11 +72,11 @@ public class login extends Fragment {
     }
     private void connectcomponents() {
         fbs = FirebaseServices.getInstance();
-        email1 = getView().findViewById(R.id.ETDemail);
-        code = getView().findViewById(R.id.ETDPassword);
-        login = getView().findViewById(R.id.BTDSignIn);
+        email1 = getView().findViewById(R.id.ETPemail);
+        code = getView().findViewById(R.id.ETPPassword);
+        login = getView().findViewById(R.id.BTPSignIn);
         forgotpassword = getView().findViewById(R.id.ForgotPasswordLogin) ;
-        Button button = getView().findViewById(R.id.BTDSignIn);
+        Button button = getView().findViewById(R.id.BTPSignIn);
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -110,7 +110,7 @@ public class login extends Fragment {
                                 {
                                     Toast.makeText(getActivity(), "welcome to the new world", Toast.LENGTH_SHORT).show();
                                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction() ;
-                                    ft.replace(R.id.frameLayoutMain , new putyourdata()) ;
+                                    ft.replace(R.id.frameLayoutMain , new profile()) ;
                                     ft.commit() ;
                                 }
 

@@ -3,57 +3,57 @@ package com.example.baselproject;
 import android.widget.EditText;
 
 public class Data {
-    private EditText email ;
-    private EditText password ;
-    private EditText username ;
-    private EditText phone ;
+    private String email ;
+    private String  password ;
+    private String  username ;
+    private String  phone ;
 
-    public Data(EditText email, EditText password, EditText username, EditText phone) {
+    public Data(String email, String password, String username, String phone) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.phone = phone;
     }
 
-    public EditText getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(EditText email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public EditText getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(EditText password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public EditText getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(EditText username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public EditText getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(EditText phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
     @Override
     public String toString() {
         return "Data{" +
-                "email=" + email +
-                ", password=" + password +
-                ", username=" + username +
-                ", phone=" + phone +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }
