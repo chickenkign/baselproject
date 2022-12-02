@@ -14,8 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
@@ -32,7 +30,6 @@ public class login extends Fragment {
     Button login ;
     private FirebaseServices fbs;
     TextView forgotpassword ;
-    Data data ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,11 +72,11 @@ public class login extends Fragment {
     }
     private void connectcomponents() {
         fbs = FirebaseServices.getInstance();
-        email1 = getView().findViewById(R.id.ETLUsername);
-        code = getView().findViewById(R.id.ETLPassword);
-        login = getView().findViewById(R.id.BTLSignIn);
+        email1 = getView().findViewById(R.id.ETDemail);
+        code = getView().findViewById(R.id.ETDPassword);
+        login = getView().findViewById(R.id.BTDSignIn);
         forgotpassword = getView().findViewById(R.id.ForgotPasswordLogin) ;
-        Button button = getView().findViewById(R.id.BTLSignIn);
+        Button button = getView().findViewById(R.id.BTDSignIn);
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -109,29 +106,20 @@ public class login extends Fragment {
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
+                                if (task.isSuccessful())
+                                {
                                     Toast.makeText(getActivity(), "welcome to the new world", Toast.LENGTH_SHORT).show();
-                                    fbs.getFire().collection("books").document("LA")
-                                            .set(data)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Toast.makeText(getActivity(), "DocumentSnapshot successfully written!", Toast.LENGTH_SHORT).show();
-                                                    return;
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getActivity(), "Error writing document", Toast.LENGTH_SHORT).show();
-                                                    return;
-                                                }
-                                            });
-                                } else {
+                                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction() ;
+                                    ft.replace(R.id.frameLayoutMain , new putyourdata()) ;
+                                    ft.commit() ;
+                                }
+
+                                else {
                                     Toast.makeText(getActivity(), "Wrong email or password my guy", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                             }
+
                         });
 
 

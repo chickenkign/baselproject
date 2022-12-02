@@ -24,7 +24,7 @@
             android:textColor="#ffffff"/>
 
         <EditText
-            android:id="@+id/ETLUsername"
+            android:id="@+id/ETDemail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -32,7 +32,7 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/ETLPassword"
+            android:id="@+id/ETDPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -50,7 +50,7 @@
             />
 
         <Button
-            android:id="@+id/BTLSignIn"
+            android:id="@+id/BTDSignIn"
             android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
