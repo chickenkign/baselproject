@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +14,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link profile#newInstance} factory method to
+ * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class profile extends Fragment {
+public class ProfileFragment extends Fragment {
     EditText username , password , email , phone ;
     Button bt ;
     private FirebaseServices fbs ;
@@ -35,7 +35,7 @@ public class profile extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public profile() {
+    public ProfileFragment() {
         // Required empty public constructor
     }
 
@@ -48,8 +48,8 @@ public class profile extends Fragment {
      * @return A new instance of fragment profile.
      */
     // TODO: Rename and change types and number of parameters
-    public static profile newInstance(String param1, String param2) {
-        profile fragment = new profile();
+    public static ProfileFragment newInstance(String param1, String param2) {
+        ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -89,27 +89,25 @@ public class profile extends Fragment {
         {
             @Override
             public void onClick(View v) {
-                Data data = new Data(email.getText().toString() , password.getText().toString() , username.getText().toString() , phone.getText().toString()) ;
+                User user = new User(email.getText().toString() , password.getText().toString() , username.getText().toString() , phone.getText().toString()) ;
                 if (email.getText().toString().trim().isEmpty() || password.getText().toString().trim().isEmpty() ||
                         username.getText().toString().trim().isEmpty() || phone.getText().toString().trim().isEmpty())
                 {
                     Toast.makeText(getActivity(), "fill everything pls", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                fbs.getFire().collection("your data").document("LA")
-                        .set(data)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getActivity(), "try again", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                fbs.getFire().collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "sorry but something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
             }
             });

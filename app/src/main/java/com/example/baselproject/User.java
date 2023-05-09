@@ -1,14 +1,12 @@
 package com.example.baselproject;
 
-import android.widget.EditText;
-
-public class Data {
+public class User {
     private String email ;
     private String  password ;
     private String  username ;
     private String  phone ;
 
-    public Data(String email, String password, String username, String phone) {
+    public User(String email, String password, String username, String phone) {
         this.email = email;
         this.password = password;
         this.username = username;

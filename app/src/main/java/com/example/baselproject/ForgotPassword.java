@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 public class ForgotPassword extends Fragment {
     EditText email ;
     Button bt ;
+    TextView back ;
     private FirebaseServices fbs;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -77,6 +80,7 @@ public class ForgotPassword extends Fragment {
     }
 
     private void connenctcomponents() {
+        back = getView().findViewById(R.id.TVGoBackForgotPassowrd);
         email = getView().findViewById(R.id.EmailForgotPassword);
         bt = getView().findViewById(R.id.ButtonForgotPassword);
         fbs = FirebaseServices.getInstance();
@@ -97,6 +101,13 @@ public class ForgotPassword extends Fragment {
 
             }
         } ) ;
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new LoginFragment());
+                ft.commit();
+            }
+        });
     }
 }

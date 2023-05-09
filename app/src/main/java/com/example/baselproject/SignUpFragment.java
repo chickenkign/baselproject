@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,12 +22,13 @@ import java.util.regex.Pattern;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignUp#newInstance} factory method to
+ * Use the {@link SignUpFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignUp extends Fragment {
+public class SignUpFragment extends Fragment {
     private Button signUp ;
     EditText Password , Email , Cpassword ;
+    TextView goback ;
     private FirebaseServices fbs;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -37,7 +40,7 @@ public class SignUp extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SignUp() {
+    public SignUpFragment() {
         // Required empty public constructor
     }
 
@@ -50,8 +53,8 @@ public class SignUp extends Fragment {
      * @return A new instance of fragment SignUp.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignUp newInstance(String param1, String param2) {
-        SignUp fragment = new SignUp();
+    public static SignUpFragment newInstance(String param1, String param2) {
+        SignUpFragment fragment = new SignUpFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,6 +84,7 @@ public class SignUp extends Fragment {
     }
 
     private void connenctcomponents() {
+        goback = getView().findViewById(R.id.TVGoBack) ;
         signUp = getView().findViewById(R.id.BTSsignup) ;
         Email = getView().findViewById(R.id.ETSemail) ;
         Password = getView().findViewById(R.id.ETSpassword) ;
@@ -116,6 +120,9 @@ public class SignUp extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getActivity(), "welcome to the new world", Toast.LENGTH_SHORT).show();
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.frameLayoutMain, new LoginFragment());
+                            ft.commit();
                             return;
                         } else {
                             Toast.makeText(getActivity(), "Wrong email or password my gay", Toast.LENGTH_SHORT).show();
@@ -126,6 +133,14 @@ public class SignUp extends Fragment {
 
 
         }
+        });
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new LoginFragment());
+                ft.commit();
+            }
         });
 
     }
