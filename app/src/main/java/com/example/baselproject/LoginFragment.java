@@ -104,7 +104,7 @@ public class LoginFragment extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getActivity(), "welcome to the new world", Toast.LENGTH_SHORT).show();
-                                    Countinue();
+                                    gotothemainplace();
                                     return;
                                 } else {
                                     Toast.makeText(getActivity(), "Wrong email or password my guy", Toast.LENGTH_SHORT).show();
@@ -163,7 +163,7 @@ public class LoginFragment extends Fragment {
 
                 return matcher.matches();
             }
-            public void Countinue()
+            public void gotothemainplace()
             {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameLayoutMain, new MainListFragment());

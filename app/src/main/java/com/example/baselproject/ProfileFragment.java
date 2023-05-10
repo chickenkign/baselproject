@@ -1,15 +1,22 @@
 package com.example.baselproject;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +32,8 @@ public class ProfileFragment extends Fragment {
     EditText username , password , email , phone ;
     Button bt ;
     private FirebaseServices fbs ;
+    ImageView iv , ImageView ;
+    private final int galerry = 1000 ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,20 +88,20 @@ public class ProfileFragment extends Fragment {
     }
 
     private void connectcomponents() {
-        username = getView().findViewById(R.id.ETPusername) ;
-        password = getView().findViewById(R.id.ETPPassword) ;
-        phone = getView().findViewById(R.id.ETPPhone) ;
-        email = getView().findViewById(R.id.ETPemail) ;
-        bt = getView().findViewById(R.id.BTPSignIn) ;
+        ImageView = getView().findViewById(R.id.IVProfile);
+        iv = getView().findViewById(R.id.IVChooseImage);
+        username = getView().findViewById(R.id.ETPusername);
+        password = getView().findViewById(R.id.ETPPassword);
+        phone = getView().findViewById(R.id.ETPPhone);
+        email = getView().findViewById(R.id.ETPemail);
+        bt = getView().findViewById(R.id.BTPSignIn);
         fbs = FirebaseServices.getInstance();
-        bt.setOnClickListener(new View.OnClickListener()
-        {
+        bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User(email.getText().toString() , password.getText().toString() , username.getText().toString() , phone.getText().toString()) ;
+                User user = new User(email.getText().toString(), password.getText().toString(), username.getText().toString(), phone.getText().toString());
                 if (email.getText().toString().trim().isEmpty() || password.getText().toString().trim().isEmpty() ||
-                        username.getText().toString().trim().isEmpty() || phone.getText().toString().trim().isEmpty())
-                {
+                        username.getText().toString().trim().isEmpty() || phone.getText().toString().trim().isEmpty()) {
                     Toast.makeText(getActivity(), "fill everything pls", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -100,6 +109,9 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.frameLayoutMain, new MainListFragment());
+                        ft.commit();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -110,6 +122,26 @@ public class ProfileFragment extends Fragment {
 
 
             }
-            });
+        });
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent IGallery = new Intent(Intent.ACTION_PICK);
+                IGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(IGallery,galerry);
+            }
+        });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            if(requestCode == galerry)
+            {
+                iv.setImageURI(data.getData());
+            }
+        }
     }
 }

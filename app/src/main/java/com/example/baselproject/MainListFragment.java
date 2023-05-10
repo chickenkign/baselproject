@@ -3,10 +3,12 @@ package com.example.baselproject;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MainListFragment extends Fragment {
+    ImageView iv ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,7 +71,14 @@ public class MainListFragment extends Fragment {
     }
 
     private void connectcomponents() {
-
+        iv = getView().findViewById(R.id.IVProfile);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new ProfileFragment());
+                ft.commit();
+            }
+        });
     }
-
 }

@@ -1,4 +1,7 @@
 package com.example.baselproject;
+import android.widget.ImageView;
+
+import androidx.annotation.DrawableRes;
 
 public class User {
     private String email ;
@@ -54,4 +57,5 @@ public class User {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
 }
