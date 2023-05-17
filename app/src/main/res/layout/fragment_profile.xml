@@ -38,20 +38,20 @@
             android:inputType="textPassword" />
 
         <EditText
+            android:id="@+id/etpPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:ems="10"
+            android:hint="phone number"
+            android:inputType="phone" />
+
+        <EditText
             android:id="@+id/ETPusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Username"
             android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/ETPPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="phone number"
-            android:inputType="textPassword" />
 
 
         <Button

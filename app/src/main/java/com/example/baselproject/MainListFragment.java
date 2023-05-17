@@ -1,14 +1,24 @@
 package com.example.baselproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.example.baselproject.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +26,7 @@ import android.widget.ImageView;
  * create an instance of this fragment.
  */
 public class MainListFragment extends Fragment {
-    ImageView iv ;
+    BottomNavigationView bottomNavigationView ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,7 +71,6 @@ public class MainListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_list, container, false);
     }
     @Override
@@ -71,14 +80,30 @@ public class MainListFragment extends Fragment {
     }
 
     private void connectcomponents() {
-        iv = getView().findViewById(R.id.IVProfile);
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.frameLayoutMain, new ProfileFragment());
-                ft.commit();
-            }
-        });
+        bottomNavigationView = getView().findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navlistener);
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener navlistener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment SelectedFragment = null;
+
+                    switch (item.getItemId()){
+                        case R.id.NavigatorMain:
+                            SelectedFragment = new RecyclerViewFragment();
+                            break;
+                        case R.id.NavigatorProfile:
+                            SelectedFragment = new ProfileFragment();
+                            break;
+                        case R.id.NavigatorSignOut:
+                            SelectedFragment = new SignOutFragment();
+                            break;
+                    }
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayoutNavigator , SelectedFragment).commit() ;
+
+                    return true ;
+                }
+            } ;
+
 }

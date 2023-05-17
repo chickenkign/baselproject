@@ -1,6 +1,8 @@
 package com.example.baselproject;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -91,9 +95,9 @@ public class LoginFragment extends Fragment {
 
 // onClick of button perform this simplest code.
                 if (!email.matches(emailPattern)) {
-                    Toast.makeText(getActivity(), "Invalid email address", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                Toast.makeText(getActivity(), "Invalid email address", Toast.LENGTH_SHORT).show();
+                 return;
+            }
                 if (!isValidPassword(password)) {
                     Toast.makeText(getActivity(), "Invalid Password", Toast.LENGTH_SHORT).show();
                     return;
@@ -102,14 +106,14 @@ public class LoginFragment extends Fragment {
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                FirebaseUser G = FirebaseAuth.getInstance().getCurrentUser();
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getActivity(), "welcome to the new world", Toast.LENGTH_SHORT).show();
                                     gotothemainplace();
-                                    return;
                                 } else {
                                     Toast.makeText(getActivity(), "Wrong email or password my guy", Toast.LENGTH_SHORT).show();
-                                    return;
                                 }
+                                return;
                             }
 
                         });
@@ -135,6 +139,12 @@ public class LoginFragment extends Fragment {
                 ft.commit();
             }
         });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            gotothemainplace();
+        }
     }
 
             @Override

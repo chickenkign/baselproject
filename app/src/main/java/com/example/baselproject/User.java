@@ -1,19 +1,22 @@
 package com.example.baselproject;
 import android.widget.ImageView;
 
-import androidx.annotation.DrawableRes;
-
 public class User {
-    private String email ;
-    private String  password ;
-    private String  username ;
-    private String  phone ;
+    private String email;
+    private String password;
+    private String phone;
+    private String username;
+    private String image ;
 
-    public User(String email, String password, String username, String phone) {
+    public User() {
+    }
+
+    public User(String email, String password, String phone, String username, String image) {
         this.email = email;
         this.password = password;
-        this.username = username;
         this.phone = phone;
+        this.username = username;
+        this.image = image;
     }
 
     public String getEmail() {
@@ -32,14 +35,6 @@ public class User {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -48,14 +43,30 @@ public class User {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "Data{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+    public String getUsername() {
+        return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", username='" + username + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }
