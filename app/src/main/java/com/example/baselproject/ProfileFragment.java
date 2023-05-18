@@ -137,9 +137,6 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
-                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.frameLayoutMain, new MainListFragment());
-                        ft.commit();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

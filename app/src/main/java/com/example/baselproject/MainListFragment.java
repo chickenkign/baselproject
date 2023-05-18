@@ -99,6 +99,9 @@ public class MainListFragment extends Fragment {
                         case R.id.NavigatorSignOut:
                             SelectedFragment = new SignOutFragment();
                             break;
+                        case R.id.NavigatorHome:
+                            SelectedFragment = new HomeFragment();
+                            break;
                     }
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayoutNavigator , SelectedFragment).commit() ;
 
