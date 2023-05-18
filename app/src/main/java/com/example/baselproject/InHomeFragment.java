@@ -3,11 +3,13 @@ package com.example.baselproject;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 /**
@@ -16,7 +18,7 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class InHomeFragment extends Fragment {
-    Button btnsoon , TheButton , LivingRoom , UpStairs;
+    ImageView btnsoon , TheButton , LivingRoom , UpStairs , Out;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,9 +74,10 @@ public class InHomeFragment extends Fragment {
     }
 
     private void connenctcomponents() {
-        btnsoon = getView().findViewById(R.id.BTNInHomeSoon);
-        TheButton = getView().findViewById(R.id.BTNDontClickIt);
-        LivingRoom = getView().findViewById(R.id.BTNLivingRoom);
+        btnsoon = getView().findViewById(R.id.IVComingSoon);
+        TheButton = getView().findViewById(R.id.IVDontTouchMe);
+        LivingRoom = getView().findViewById(R.id.IVLivingRoom);
+        Out = getView().findViewById(R.id.IVgoOutSide);
         btnsoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +94,15 @@ public class InHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "welcome to your living Room", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Good Bye Master", Toast.LENGTH_SHORT).show();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new MainListFragment());
+                ft.commit();
             }
         });
     }

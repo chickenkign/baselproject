@@ -1,6 +1,7 @@
 package com.example.baselproject;
 
 import android.graphics.Rect;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
  */
 public class HomeFragment extends Fragment {
     Button btn ;
-
+    ImageView iv ;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -78,8 +79,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void connentcomponents() {
-        btn = getView().findViewById(R.id.BTNHome) ;
-        btn.setOnClickListener(new View.OnClickListener() {
+        iv = getView().findViewById(R.id.IVBNTHome);
+        iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
