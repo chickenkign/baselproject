@@ -7,7 +7,6 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -19,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,16 +27,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayInputStream;
+import org.checkerframework.common.subtyping.qual.Bottom;
+
 import java.io.ByteArrayOutputStream;
 import java.util.UUID;
 
@@ -45,15 +58,17 @@ import java.util.UUID;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-    EditText username , email , password , phone ;
-    Button bt ;
-    private FirebaseServices fbs ;
-    ImageView iv ;
-    private final int galerry = 1000 ;
+    EditText username, email, password, phone;
+    Button bt;
+    private FirebaseServices fbs;
+    ImageView iv;
+    private final int galerry = 1000;
+    boolean b ;
     private static final int PICK_IMAGE_REQUEST = 1;
-    Uri imageUri ;
-
+    private DatabaseReference mDatabase;
+    Uri imageUri;
     FirebaseStorage storage = FirebaseStorage.getInstance();
+
     StorageReference storageRef = storage.getReference();
 
     // Specify the path to the image file
@@ -105,8 +120,8 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
-    public void onStart()
-    {
+
+    public void onStart() {
         super.onStart();
         connectcomponents();
     }
@@ -119,61 +134,63 @@ public class ProfileFragment extends Fragment {
         email = getView().findViewById(R.id.ETPemail);
         bt = getView().findViewById(R.id.BTPSignIn);
         fbs = FirebaseServices.getInstance();
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        if (email.getText().toString().trim().isEmpty() || password.getText().toString().trim().isEmpty()
+                                || phone.getText().toString().trim().isEmpty() || username.getText().toString().trim().isEmpty()) {
+                            Toast.makeText(getActivity(), "fill everything pls", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        String path = uploadImageToFirebaseStorage();
+                        if (path == null)
+                            return;
 
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (email.getText().toString().trim().isEmpty() || password.getText().toString().trim().isEmpty()
-                        || phone.getText().toString().trim().isEmpty()|| username.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(getActivity(), "fill everything pls", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String path = uploadImageToFirebaseStorage() ;
-                if(path == null)
-                    return ;
+                        User user = new User(email.getText().toString(), password.getText().toString(), phone.getText().toString(), username.getText().toString(), path);
+                        fbs.getFire().collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity(), "sorry but something went wrong", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+            });
 
-                User user = new User(email.getText().toString(), password.getText().toString() , phone.getText().toString() , username.getText().toString() , path);
-                fbs.getFire().collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), "sorry but something went wrong", Toast.LENGTH_SHORT).show();
-                    }
-                });
-        }
-                              });
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, PICK_IMAGE_REQUEST);
-                }
+            }
         });
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             // Get the selected image's URI
-             imageUri = data.getData();
-             iv.setImageURI(imageUri);
+            imageUri = data.getData();
+            iv.setImageURI(imageUri);
             // Do something with the imageUri, such as upload it to Firebase Storage
         }
     }
-    private String uploadImageToFirebaseStorage(){
+
+    private String uploadImageToFirebaseStorage() {
         BitmapDrawable drawable = (BitmapDrawable) iv.getDrawable();
         Bitmap Image = drawable.getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Image.compress(Bitmap.CompressFormat.JPEG,100,baos);
-        byte[]data= baos.toByteArray();
-        StorageReference ref =fbs.getStorage().getReference("listingPictures/"+ UUID.randomUUID().toString());
-        UploadTask uploadTask =ref.putBytes(data);
+        Image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        StorageReference ref = fbs.getStorage().getReference("listingPictures/" + UUID.randomUUID().toString());
+        UploadTask uploadTask = ref.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {

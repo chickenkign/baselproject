@@ -2,11 +2,13 @@ package com.example.baselproject;
 
 import android.graphics.Rect;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     Button btn ;
     ImageView iv ;
+    MediaPlayer mp ;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -86,7 +89,28 @@ public class HomeFragment extends Fragment {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameLayoutMain, new InHomeFragment());
                 ft.commit();
+                play();
             }
         });
     }
+    public void play(){
+        if(mp == null){
+            mp = MediaPlayer.create(getActivity() , R.raw.michelhehe);
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stopplay();
+                }
+            });
+        }
+        mp.start();
+    }
+    public void stopplay() {
+        if (mp != null){
+            mp.release();
+            mp = null ;
+            Toast.makeText(getActivity(), "Mediaplayer release", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

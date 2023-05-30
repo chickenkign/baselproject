@@ -4,18 +4,22 @@
     <item
         android:id="@+id/NavigatorMain"
         android:icon="@drawable/baseline_web_24"
-        android:title="Main" />
+        android:title="Main"
+        />
 
     <item android:title="Your Home"
         android:icon="@drawable/baseline_home_24"
-        android:id="@+id/NavigatorHome"/>
+        android:id="@+id/NavigatorHome"
+        />
 
     <item android:title="Profile"
         android:icon="@drawable/pngtreevector_edit_profile_icon_4101421"
-        android:id="@+id/NavigatorProfile"/>
+        android:id="@+id/NavigatorProfile"
+        />
     <item
         android:id="@+id/NavigatorSignOut"
         android:icon="@drawable/baseline_logout_24"
-        android:title="Sign Out" />
+        android:title="Sign Out"
+        />
 
 </menu>
