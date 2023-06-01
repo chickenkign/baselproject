@@ -4,60 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/r"
-    tools:context=".InHomeFragment">
+    android:background="@drawable/diningroom"
+    tools:context=".DiningRoomFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/IVDontTouchMe"
-            android:layout_width="277dp"
-            android:layout_height="209dp"
+            android:id="@+id/IVDinningRoomLamp1"
+            android:layout_width="20dp"
+            android:layout_height="45dp"
             android:src="@drawable/__transparent_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.807"
+            app:layout_constraintHorizontal_bias="0.475"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.986" />
+            app:layout_constraintVertical_bias="0.583" />
 
         <ImageView
-            android:id="@+id/IVComingSoon"
-            android:layout_width="117dp"
-            android:layout_height="405dp"
+            android:id="@+id/IVDinningRoomDoor"
+            android:layout_width="30dp"
+            android:layout_height="238dp"
             android:src="@drawable/__transparent_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.098"
+            app:layout_constraintHorizontal_bias="0.806"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.301" />
 
         <ImageView
-            android:id="@+id/IVLivingRoom"
-            android:layout_width="76dp"
-            android:layout_height="409dp"
+            android:id="@+id/IVDinningRoomLamp3"
+            android:layout_width="20dp"
+            android:layout_height="26dp"
             android:src="@drawable/__transparent_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.782"
+            app:layout_constraintHorizontal_bias="0.475"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.486" />
 
         <ImageView
-            android:id="@+id/IVgoOutSide"
-            android:layout_width="80dp"
-            android:layout_height="213dp"
+            android:id="@+id/IVDinningRoomLamp4"
+            android:layout_width="56dp"
+            android:layout_height="46dp"
             android:src="@drawable/__transparent_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.087"
+            app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.994" />
-
+            app:layout_constraintVertical_bias="0.256" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

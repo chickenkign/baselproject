@@ -84,6 +84,9 @@ public class InHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Coming Soon", Toast.LENGTH_SHORT).show();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new DiningRoomFragment());
+                ft.commit();
                 play2();
             }
         });
@@ -98,6 +101,9 @@ public class InHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "welcome to your living Room", Toast.LENGTH_SHORT).show();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new LivingRoomFragment());
+                ft.commit();
                 play();
             }
         });
