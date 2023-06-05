@@ -1,5 +1,6 @@
 package com.example.baselproject;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.media.Image;
 import android.media.MediaPlayer;
@@ -83,6 +84,16 @@ public class HomeFragment extends Fragment {
 
     private void connentcomponents() {
         iv = getView().findViewById(R.id.IVBNTHome);
+        final Button Connect = getView().findViewById(R.id.buttonConnect);
+        Connect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Move to adapter list
+                Intent intent = new Intent(getActivity(), SelectDeviceActivity.class);
+                startActivity(intent);
+            }
+        });
+
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
