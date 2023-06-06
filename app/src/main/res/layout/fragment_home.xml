@@ -19,12 +19,12 @@
             android:layout_marginEnd="143dp"
             android:layout_marginBottom="34dp"
             android:src="@drawable/_t41q"
-            app:layout_constraintBottom_toTopOf="@+id/imageView4"
+            app:layout_constraintBottom_toTopOf="@+id/IVHomeBluetooth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/IVHomeBluetooth"
             android:layout_width="94dp"
             android:layout_height="235dp"
             android:layout_marginEnd="32dp"
@@ -33,17 +33,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/IVBNTHome"
             app:layout_constraintTop_toBottomOf="@+id/IVBNTHome" />
-        <Button
-            android:id="@+id/buttonConnect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Connect"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.532"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.196" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

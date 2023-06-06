@@ -26,9 +26,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    Button btn ;
-    ImageView iv ;
     MediaPlayer mp ;
+    ImageView iv , bluetooth;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -84,13 +83,12 @@ public class HomeFragment extends Fragment {
 
     private void connentcomponents() {
         iv = getView().findViewById(R.id.IVBNTHome);
-        final Button Connect = getView().findViewById(R.id.buttonConnect);
-        Connect.setOnClickListener(new View.OnClickListener() {
+        bluetooth = getView().findViewById(R.id.IVHomeBluetooth);
+        bluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Move to adapter list
-                Intent intent = new Intent(getActivity(), SelectDeviceActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity() , MainActivity2.class);
+                startActivity(i);
             }
         });
 
@@ -106,7 +104,7 @@ public class HomeFragment extends Fragment {
     }
     public void play(){
         if(mp == null){
-            mp = MediaPlayer.create(getActivity() , R.raw.michelhehe);
+            mp = MediaPlayer.create(getActivity() , R.raw.welcome);
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {

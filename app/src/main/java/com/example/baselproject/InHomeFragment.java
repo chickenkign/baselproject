@@ -19,8 +19,8 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class InHomeFragment extends Fragment {
-    MediaPlayer mp ;
     ImageView btnsoon , TheButton , LivingRoom , UpStairs , Out;
+    MediaPlayer mp ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,14 +87,13 @@ public class InHomeFragment extends Fragment {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameLayoutMain, new DiningRoomFragment());
                 ft.commit();
-                play2();
             }
         });
         TheButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Dont touch here :3", Toast.LENGTH_SHORT).show();
-                stopplay();
+                pauseplay();
             }
         });
         LivingRoom.setOnClickListener(new View.OnClickListener() {
@@ -120,19 +119,7 @@ public class InHomeFragment extends Fragment {
     }
     public void play(){
         if(mp == null){
-            mp = MediaPlayer.create(getActivity() , R.raw.andrewtate);
-            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    stopplay();
-                }
-            });
-        }
-        mp.start();
-    }
-    public void play2(){
-        if(mp == null){
-            mp = MediaPlayer.create(getActivity() , R.raw.amkbseto);
+            mp = MediaPlayer.create(getActivity() , R.raw.welcome);
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {

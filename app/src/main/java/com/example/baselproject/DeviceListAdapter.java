@@ -36,8 +36,9 @@ public class DeviceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.deviceinfolayout, parent, false);
-        return new MyAdapter.MyViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.deviceinfolayout, parent, false);
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         itemHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,MainActivity.class);
+                Intent intent = new Intent(context,MainActivity2.class);
                 // Send device details to the MainActivity
                 intent.putExtra("deviceName", deviceInfoModel.getDeviceName());
                 intent.putExtra("deviceAddress",deviceInfoModel.getDeviceHardwareAddress());

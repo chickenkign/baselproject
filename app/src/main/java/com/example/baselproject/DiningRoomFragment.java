@@ -1,5 +1,7 @@
 package com.example.baselproject;
 
+import static com.example.baselproject.MainActivity2.connectedThread;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -17,7 +20,8 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class DiningRoomFragment extends Fragment {
-    ImageView door , lamp2 , lamp3 , lamp4 ;
+    ImageView door ;
+    Boolean b = true ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,33 +78,72 @@ public class DiningRoomFragment extends Fragment {
 
     private void connenctcomponents() {
         door = getView().findViewById(R.id.IVDinningRoomDoor);
-        lamp2= getView().findViewById(R.id.IVDinningRoomLamp1);
-        lamp3 = getView().findViewById(R.id.IVDinningRoomLamp3);
-        lamp4 = getView().findViewById(R.id.IVDinningRoomLamp4);
+        final ImageView iv = getView().findViewById(R.id.IVDinningRoomLamp3);
+        final ImageView iv1 = getView().findViewById(R.id.IVDinningRoomLamp2);
+        final ImageView iv2 = getView().findViewById(R.id.IVDinningRoomLamp1);
         door.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goback();
             }
         });
-        lamp2.setOnClickListener(new View.OnClickListener() {
+        iv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Message();
+            public void onClick(View view) {
+                String cmdText = null;
+                if (b == true) {
+                    b = false;
+                    cmdText = "a";
+                } else
+                {
+                    b = true;
+                    // Command to turn off LED on Arduino. Must match with the command in Arduino code
+                    cmdText = "b";
+                    //cmdText = "<turn off>";
+                }
+                // Send command to Arduino board
+                connectedThread.write(cmdText);
             }
         });
-        lamp3.setOnClickListener(new View.OnClickListener() {
+
+        iv1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Message();
+            public void onClick(View view) {
+                String cmdText = null;
+                if (b == true) {
+                    b = false;
+                    cmdText = "a";
+                } else
+                {
+                    b = true;
+                    // Command to turn off LED on Arduino. Must match with the command in Arduino code
+                    cmdText = "b";
+                    //cmdText = "<turn off>";
+                }
+                // Send command to Arduino board
+                connectedThread.write(cmdText);
             }
         });
-        lamp4.setOnClickListener(new View.OnClickListener() {
+
+        iv2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Message();
+            public void onClick(View view) {
+                String cmdText = null;
+                if (b == true) {
+                    b = false;
+                    cmdText = "a";
+                } else
+                {
+                    b = true;
+                    // Command to turn off LED on Arduino. Must match with the command in Arduino code
+                    cmdText = "b";
+                    //cmdText = "<turn off>";
+                }
+                // Send command to Arduino board
+                connectedThread.write(cmdText);
             }
         });
+
     }
 
     public void goback()
