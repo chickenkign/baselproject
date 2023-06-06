@@ -3,10 +3,12 @@ package com.example.baselproject;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class LivingRoomFragment extends Fragment {
+    ImageView SecretSanta , iv ;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +63,33 @@ public class LivingRoomFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_living_room, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        connentcomponents();
+    }
+
+    private void connentcomponents() {
+        iv = getView().findViewById(R.id.IVGoBack);
+        SecretSanta = getView().findViewById(R.id.SecretSantaRoom);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new InHomeFragment());
+                ft.commit();
+            }
+        });
+
+        SecretSanta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new SecretSantaFragment());
+                ft.commit();
+            }
+        });
     }
 }

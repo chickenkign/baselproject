@@ -1,24 +1,19 @@
 package com.example.baselproject;
 
+import static com.example.baselproject.MainActivity2.connectedThread;
+
 import android.content.Intent;
-import android.graphics.Rect;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,6 +78,7 @@ public class HomeFragment extends Fragment {
 
     private void connentcomponents() {
         iv = getView().findViewById(R.id.IVBNTHome);
+        final ImageView opendoor = getView().findViewById(R.id.IVOpenDoor);
         bluetooth = getView().findViewById(R.id.IVHomeBluetooth);
         bluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +95,14 @@ public class HomeFragment extends Fragment {
                 ft.replace(R.id.frameLayoutMain, new InHomeFragment());
                 ft.commit();
                 play();
+            }
+        });
+        opendoor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cmdText = null;
+                cmdText = "o";
+                connectedThread.write(cmdText);
             }
         });
     }

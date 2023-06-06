@@ -19,12 +19,12 @@
             android:layout_marginEnd="143dp"
             android:layout_marginBottom="34dp"
             android:src="@drawable/_t41q"
-            app:layout_constraintBottom_toTopOf="@+id/IVHomeBluetooth"
+            app:layout_constraintBottom_toTopOf="@+id/IVOpenDoor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/IVHomeBluetooth"
+            android:id="@+id/IVOpenDoor"
             android:layout_width="94dp"
             android:layout_height="235dp"
             android:layout_marginEnd="32dp"
@@ -33,6 +33,29 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/IVBNTHome"
             app:layout_constraintTop_toBottomOf="@+id/IVBNTHome" />
+
+        <ImageView
+            android:id="@+id/IVHomeBluetooth"
+            android:layout_width="58dp"
+            android:layout_height="130dp"
+            android:src="@drawable/__transparent_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.781"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.655" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="140dp"
+            android:layout_height="23dp"
+            android:text="Bluetooth connector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

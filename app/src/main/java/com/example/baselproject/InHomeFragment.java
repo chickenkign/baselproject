@@ -83,10 +83,10 @@ public class InHomeFragment extends Fragment {
         btnsoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Coming Soon", Toast.LENGTH_SHORT).show();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameLayoutMain, new DiningRoomFragment());
                 ft.commit();
+                play2();
             }
         });
         TheButton.setOnClickListener(new View.OnClickListener() {
@@ -129,11 +129,22 @@ public class InHomeFragment extends Fragment {
         }
         mp.start();
     }
+    public void play2(){
+        if(mp == null){
+            mp = MediaPlayer.create(getActivity() , R.raw.pasito);
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stopplay();
+                }
+            });
+        }
+        mp.start();
+    }
     public void stopplay() {
         if (mp != null){
             mp.release();
             mp = null ;
-            Toast.makeText(getActivity(), "Mediaplayer release", Toast.LENGTH_SHORT).show();
         }
     }
     public void pauseplay(){

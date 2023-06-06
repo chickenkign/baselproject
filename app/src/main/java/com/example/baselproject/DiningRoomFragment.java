@@ -93,12 +93,12 @@ public class DiningRoomFragment extends Fragment {
                 String cmdText = null;
                 if (b == true) {
                     b = false;
-                    cmdText = "a";
+                    cmdText = "n";
                 } else
                 {
                     b = true;
                     // Command to turn off LED on Arduino. Must match with the command in Arduino code
-                    cmdText = "b";
+                    cmdText = "d";
                     //cmdText = "<turn off>";
                 }
                 // Send command to Arduino board
@@ -112,12 +112,12 @@ public class DiningRoomFragment extends Fragment {
                 String cmdText = null;
                 if (b == true) {
                     b = false;
-                    cmdText = "a";
+                    cmdText = "n";
                 } else
                 {
                     b = true;
                     // Command to turn off LED on Arduino. Must match with the command in Arduino code
-                    cmdText = "b";
+                    cmdText = "d";
                     //cmdText = "<turn off>";
                 }
                 // Send command to Arduino board
@@ -131,12 +131,12 @@ public class DiningRoomFragment extends Fragment {
                 String cmdText = null;
                 if (b == true) {
                     b = false;
-                    cmdText = "a";
+                    cmdText = "n";
                 } else
                 {
                     b = true;
                     // Command to turn off LED on Arduino. Must match with the command in Arduino code
-                    cmdText = "b";
+                    cmdText = "d";
                     //cmdText = "<turn off>";
                 }
                 // Send command to Arduino board

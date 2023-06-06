@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/secretsanta"
+    tools:context=".SecretSantaFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/IVTempReader"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
+            android:layout_marginEnd="169dp"
+            android:layout_marginBottom="69dp"
+            android:src="@drawable/__transparent_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/SantaTree1" />
+
+        <ImageView
+            android:id="@+id/SantaTree4"
+            android:layout_width="19dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="68dp"
+            android:layout_marginBottom="183dp"
+            android:src="@drawable/__transparent_background"
+            app:layout_constraintBottom_toTopOf="@+id/SantaTree2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/SantaTree1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="92dp"
+            android:layout_marginBottom="72dp"
+            android:src="@drawable/__transparent_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/IVTempReader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SantaTree3" />
+
+        <ImageView
+            android:id="@+id/SantaTree2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="261dp"
+            android:src="@drawable/__transparent_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/SantaTree1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SantaTree4" />
+
+        <ImageView
+            android:id="@+id/SantaTree3"
+            android:layout_width="34dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="163dp"
+            android:layout_marginBottom="165dp"
+            android:src="@drawable/__transparent_background"
+            app:layout_constraintBottom_toTopOf="@+id/SantaTree1"
+            app:layout_constraintStart_toStartOf="@+id/SantaTree2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/IVGoBackFromSanta"
+            android:layout_width="140dp"
+            android:layout_height="388dp"
+            android:src="@drawable/__transparent_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.134" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
