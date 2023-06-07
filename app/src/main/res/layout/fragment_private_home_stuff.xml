@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Useless.PrivateHomeStuffFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#3fff"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/IVHomeChooseImage"
+            android:layout_width="123dp"
+            android:layout_height="145dp"
+            android:src="@drawable/pngtreevector_edit_profile_icon_4101421" />
+
+        <EditText
+            android:id="@+id/ETNameItem"
+            android:layout_width="276dp"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="type the item name here"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/ETDescription"
+            android:layout_width="277dp"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="type the description here"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/BTNHomeDone"
+            android:layout_width="258dp"
+            android:layout_height="51dp"
+            android:text="Done" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,11 +11,12 @@
         android:icon="@drawable/baseline_home_24"
         android:id="@+id/NavigatorHome"
         />
-
-    <item android:title="Profile"
-        android:icon="@drawable/pngtreevector_edit_profile_icon_4101421"
+    <item
         android:id="@+id/NavigatorProfile"
+        android:icon="@drawable/pngtreevector_edit_profile_icon_4101421"
+        android:title="Profile"
         />
+
     <item
         android:id="@+id/NavigatorSignOut"
         android:icon="@drawable/baseline_logout_24"

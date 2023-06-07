@@ -19,11 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Baselproject"
         tools:targetApi="33">
-        <activity android:name=".SelectDeviceActivity"></activity>
-        <activity android:name=".MainActivity2"
+        <activity android:name=".BluetoothConnectors.SelectDeviceActivity"></activity>
+        <activity android:name=".BluetoothConnectors.MainActivity2"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".FirebaseStuff.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
