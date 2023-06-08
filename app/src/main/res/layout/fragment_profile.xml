@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#F8F5F5" />
 
         <EditText
             android:id="@+id/etpPhone"
@@ -35,7 +36,8 @@
             android:layout_height="39dp"
             android:ems="10"
             android:hint="phone number"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColor="#F6F0F0" />
 
         <EditText
             android:id="@+id/ETPusername"
@@ -43,7 +45,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Username"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#F3EDED" />
 
 
         <Button

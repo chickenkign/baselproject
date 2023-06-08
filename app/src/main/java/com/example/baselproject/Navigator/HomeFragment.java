@@ -15,11 +15,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.baselproject.FirebaseStuff.RealProfileFragment;
-import com.example.baselproject.InHome.InHomeFragment;
 import com.example.baselproject.BluetoothConnectors.MainActivity2;
 import com.example.baselproject.R;
 import com.example.baselproject.Recycler.RecyclerViewFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +28,8 @@ import com.example.baselproject.Recycler.RecyclerViewFragment;
 public class HomeFragment extends Fragment {
     MediaPlayer mp ;
     ImageView iv , bluetooth , GoProfile;
+    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail() ;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,6 +88,13 @@ public class HomeFragment extends Fragment {
         final ImageView opendoor = getView().findViewById(R.id.IVOpenDoor);
         bluetooth = getView().findViewById(R.id.IVHomeBluetooth);
         GoProfile = getView().findViewById(R.id.IVGoToProfile);
+        GoProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Gooback();
+            }
+        });
+
         bluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +107,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.frameLayoutMain, new InHomeFragment());
+                ft.replace(R.id.frameLayoutMain, new MainListFragment());
                 ft.commit();
                 play();
             }
@@ -114,15 +122,13 @@ public class HomeFragment extends Fragment {
                 }else Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
             }
         });
-        GoProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.frameLayoutMain, new RecyclerViewFragment());
-                ft.commit();
-                play();
-            }
-        });
+
+    }
+    public void Gooback() {
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameLayoutMain, new RecyclerViewFragment());
+            ft.commit();
+            play();
     }
     public void play(){
         if(mp == null){

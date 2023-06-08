@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +36,7 @@ public class RealProfileFragment extends Fragment {
     private FirebaseFirestore db ;
     TextView tvemail , tvname , tvphone ;
     String email,name,phone,loggedemail , image ;
-    ImageView iv ;
+    CircularImageView iv ;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
 
