@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.baselproject.BluetoothConnectors.MainActivity2;
+import com.example.baselproject.InHome.InHomeFragment;
 import com.example.baselproject.R;
 import com.example.baselproject.Recycler.RecyclerViewFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -107,7 +108,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.frameLayoutMain, new MainListFragment());
+                ft.replace(R.id.frameLayoutMain, new InHomeFragment());
                 ft.commit();
                 play();
             }
