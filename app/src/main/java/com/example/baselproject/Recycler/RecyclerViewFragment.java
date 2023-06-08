@@ -42,6 +42,7 @@ public class RecyclerViewFragment extends Fragment implements SelectListener {
     ArrayList<User> userArrayList;
     MyAdapter myAdapter ;
     FirebaseFirestore db;
+    ImageView iv ;
 
     ProgressDialog progressDialog ;
 
@@ -108,8 +109,16 @@ public class RecyclerViewFragment extends Fragment implements SelectListener {
         db = FirebaseFirestore.getInstance() ;
         userArrayList = new ArrayList<User>();
         myAdapter = new MyAdapter(getActivity(),userArrayList , this);
-
+        iv = getView().findViewById(R.id.IVGOBACKRecycler);
         recyclerView.setAdapter(myAdapter);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new MainListFragment());
+                ft.commit();
+            }
+        });
 
         EventChangeListener();
     }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.baselproject.FirebaseStuff.ProfileFragment;
+import com.example.baselproject.FirebaseStuff.RealProfileFragment;
 import com.example.baselproject.Recycler.HomeRecyclerFragment;
 import com.example.baselproject.R;
 import com.example.baselproject.FirebaseStuff.SignOutFragment;
@@ -99,7 +100,7 @@ public class MainListFragment extends Fragment {
                             replaceFragment(new HomeFragment());
                             break;
                         case R.id.NavigatorProfile:
-                            replaceFragment(new RecyclerViewFragment());
+                            replaceFragment(new RealProfileFragment());
                             break;
                     }
                     return true ;

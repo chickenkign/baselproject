@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email..."
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#F3E6E6" />
 
         <EditText
             android:id="@+id/ETSpassword"
@@ -37,7 +38,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Password..."
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="#EAE5E5" />
 
         <EditText
             android:id="@+id/ETScpassword"
@@ -45,7 +47,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Confrim Password.."
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="#F3E6E6" />
 
         <Button
             android:id="@+id/BTSsignup"

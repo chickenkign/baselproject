@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.baselproject.FirebaseStuff.RealProfileFragment;
 import com.example.baselproject.InHome.InHomeFragment;
 import com.example.baselproject.BluetoothConnectors.MainActivity2;
 import com.example.baselproject.R;
@@ -27,7 +28,7 @@ import com.example.baselproject.Recycler.RecyclerViewFragment;
  */
 public class HomeFragment extends Fragment {
     MediaPlayer mp ;
-    ImageView iv , bluetooth ;
+    ImageView iv , bluetooth , GoProfile;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -85,6 +86,7 @@ public class HomeFragment extends Fragment {
         iv = getView().findViewById(R.id.IVBNTHome);
         final ImageView opendoor = getView().findViewById(R.id.IVOpenDoor);
         bluetooth = getView().findViewById(R.id.IVHomeBluetooth);
+        GoProfile = getView().findViewById(R.id.IVGoToProfile);
         bluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +112,15 @@ public class HomeFragment extends Fragment {
                     cmdText = "o";
                     connectedThread.write(cmdText);
                 }else Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        GoProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new RecyclerViewFragment());
+                ft.commit();
+                play();
             }
         });
     }

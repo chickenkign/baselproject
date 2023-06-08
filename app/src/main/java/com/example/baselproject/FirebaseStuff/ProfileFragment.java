@@ -29,8 +29,11 @@ import com.example.baselproject.DataXAdapters.User;
 import com.example.baselproject.Navigator.MainListFragment;
 
 import com.example.baselproject.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
@@ -119,35 +122,37 @@ public class ProfileFragment extends Fragment {
         phone = getView().findViewById(R.id.etpPhone);
         email = getView().findViewById(R.id.ETPemail);
         bt = getView().findViewById(R.id.BTPSignIn);
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String TheEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         fbs = FirebaseServices.getInstance();
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                        if (email.getText().toString().trim().isEmpty() || phone.getText().toString().trim().isEmpty() || username.getText().toString().trim().isEmpty()) {
-                            Toast.makeText(getActivity(), "fill everything pls", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        String path = uploadImageToFirebaseStorage();
-                        if (path == null)
-                            return;
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (email.getText().toString().trim().isEmpty() || phone.getText().toString().trim().isEmpty() || username.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getActivity(), "fill everything pls", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String path = uploadImageToFirebaseStorage();
+                if (path == null)
+                    return;
 
-                        User user = new User(email.getText().toString(), phone.getText().toString(), username.getText().toString(), path);
-                        fbs.getFire().collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
-                                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                ft.replace(R.id.frameLayoutMain, new MainListFragment());
-                                ft.commit();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getActivity(), "sorry but something went wrong", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                User user = new User(email.getText().toString(), phone.getText().toString(), username.getText().toString(), path);
+                fbs.getFire().collection("users").document(TheEmail).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.frameLayoutMain, new MainListFragment());
+                        ft.commit();
                     }
-            });
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "sorry but something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
 
 
         iv.setOnClickListener(new View.OnClickListener() {
