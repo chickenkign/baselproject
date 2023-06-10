@@ -15,12 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.baselproject.DataXAdapters.MyAdapter;
 import com.example.baselproject.DataXAdapters.SelectListener;
 import com.example.baselproject.DataXAdapters.User;
+import com.example.baselproject.EveryoneProfileFragment;
 import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
 import com.google.firebase.firestore.DocumentChange;
@@ -41,6 +44,9 @@ public class RecyclerViewFragment extends Fragment implements SelectListener {
     ArrayList<User> userArrayList;
     MyAdapter myAdapter ;
     FirebaseFirestore db;
+    EditText Username ;
+    Button search ;
+    String email , name , path , phone ;
     ImageView iv ;
     static int PERMISSION_CODE=100;
     ProgressDialog progressDialog ;
@@ -103,12 +109,14 @@ public class RecyclerViewFragment extends Fragment implements SelectListener {
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
         recyclerView = getView().findViewById(R.id.rvMain) ;
+        Username = getView().findViewById(R.id.ETUSERNAME) ;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         db = FirebaseFirestore.getInstance() ;
         userArrayList = new ArrayList<User>();
         myAdapter = new MyAdapter(getActivity(),userArrayList , this);
         iv = getView().findViewById(R.id.IVGOBACKRecycler);
+        search = getView().findViewById(R.id.BTNSearch);
         recyclerView.setAdapter(myAdapter);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +124,12 @@ public class RecyclerViewFragment extends Fragment implements SelectListener {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameLayoutMain, new MainListFragment());
                 ft.commit();
+            }
+        });
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                For();
             }
         });
 
@@ -150,6 +164,26 @@ public class RecyclerViewFragment extends Fragment implements SelectListener {
 
             }
         });
+    }
+    public void For()
+    {
+        String m = Username.getText().toString() ;
+        int i ;
+        for (i = 0 ; i<userArrayList.size() ; i++)
+        {
+            String f = userArrayList.get(i).getUsername() ;
+            if(m.equals(f))
+            {
+                email = userArrayList.get(i).getEmail() ;
+                name = userArrayList.get(i).getUsername() ;
+                phone = userArrayList.get(i).getPhone() ;
+                path = userArrayList.get(i).getImage() ;
+                Toast.makeText(getActivity(), f, Toast.LENGTH_SHORT).show();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new EveryoneProfileFragment(email , name , phone , path));
+                ft.commit();
+            }
+        }
     }
 
     @Override

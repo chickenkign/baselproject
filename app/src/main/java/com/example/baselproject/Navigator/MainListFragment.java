@@ -10,14 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.baselproject.FirebaseStuff.ProfileFragment;
 import com.example.baselproject.FirebaseStuff.RealProfileFragment;
 import com.example.baselproject.Recycler.HomeRecyclerFragment;
 import com.example.baselproject.R;
-import com.example.baselproject.FirebaseStuff.SignOutFragment;
-import com.example.baselproject.Recycler.RecyclerViewFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +31,6 @@ public class MainListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     public MainListFragment() {
         // Required empty public constructor
     }
@@ -92,9 +87,6 @@ public class MainListFragment extends Fragment {
                     switch (item.getItemId()){
                         case R.id.NavigatorMain:
                             replaceFragment(new HomeRecyclerFragment());
-                            break;
-                        case R.id.NavigatorSignOut:
-                            replaceFragment(new SignOutFragment());
                             break;
                         case R.id.NavigatorHome:
                             replaceFragment(new HomeFragment());

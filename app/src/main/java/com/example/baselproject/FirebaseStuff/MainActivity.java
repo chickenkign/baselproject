@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.baselproject.AddItemFragment;
 import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
 

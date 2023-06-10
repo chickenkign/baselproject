@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.baselproject.DataXAdapters.HomeStuff;
 import com.example.baselproject.DataXAdapters.User;
 import com.example.baselproject.Navigator.MainListFragment;
 
@@ -140,6 +141,7 @@ public class ProfileFragment extends Fragment {
                 fbs.getFire().collection("users").document(TheEmail).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        AddReadyData();
                         Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frameLayoutMain, new MainListFragment());
@@ -195,6 +197,70 @@ public class ProfileFragment extends Fragment {
             }
         });
         return ref.getPath();
+    }
+    public void AddReadyData(){
+        fbs = FirebaseServices.getInstance();
+        String TheEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        HomeStuff rgb = new HomeStuff("rgb" , "click here if you want to turn on your rgb and choose any colors you like" , "/listingPictures/c8ec6edb-b052-4d83-8b46-340ea069806c") ;
+        HomeStuff temp = new HomeStuff("temp reader" , "click here any time you like to check the temp of the room" , "/listingPictures/860cf501-86fb-46da-901e-4a94ffd2f3d0");
+        HomeStuff lights = new HomeStuff("In home Lights" , "just click here so you can turn on / off in house Lights any time you want" , "/listingPictures/24f6753d-a6cf-4f86-b197-2420c395eee1");
+        HomeStuff song = new HomeStuff("christmas song" , "click here any time you like to play the christmas song" , "/listingPictures/230af05e-db08-4b2c-9d36-b420ef66b833");
+        HomeStuff door = new HomeStuff("Door" , "click here to open the door any time you want" , "/listingPictures/fbbf63c1-4982-4069-b903-93c8e8866957");
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(rgb).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(temp).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(lights).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(song).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(door).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
 
 }

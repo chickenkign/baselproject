@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
+import com.example.baselproject.Recycler.RecyclerViewFragment;
+import com.example.baselproject.Useless.PrivateHomeStuffFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,7 +38,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 public class RealProfileFragment extends Fragment {
     private FirebaseAuth auth ;
     private FirebaseFirestore db ;
-    TextView tvemail , tvname , tvphone ;
+    TextView tvemail , tvname , tvphone , tvusers , tvadd , tvlogout;
+    ImageView ivUser , ivAdd , ivLogOut ;
     String email,name,phone,loggedemail , image ;
     CircularImageView iv ;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -97,10 +102,70 @@ public class RealProfileFragment extends Fragment {
         auth = FirebaseAuth.getInstance() ;
         db = FirebaseFirestore.getInstance() ;
         loggedemail = auth.getCurrentUser().getEmail() ;
+        tvusers = getView().findViewById(R.id.TVUsers);
+        tvlogout = getView().findViewById(R.id.TVLogOut);
+        tvadd = getView().findViewById(R.id.TVAdd);
+        ivAdd = getView().findViewById(R.id.IVAdd);
+        ivUser = getView().findViewById(R.id.IVUsers);
+        ivLogOut = getView().findViewById(R.id.IVLogOut);
         tvemail = getView().findViewById(R.id.RealProfileEmail);
         tvname = getView().findViewById(R.id.RealProfileUsername);
         tvphone = getView().findViewById(R.id.RealProfilePhone);
         iv = getView().findViewById(R.id.RealProfileIV);
+        ivUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new RecyclerViewFragment());
+                ft.commit();
+            }
+        });
+        tvusers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new RecyclerViewFragment());
+                ft.commit();
+            }
+        });
+        tvlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new LoginFragment());
+                ft.commit();
+
+            }
+        });
+        ivLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new LoginFragment());
+                ft.commit();
+
+            }
+        });
+        tvadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new PrivateHomeStuffFragment());
+                ft.commit();
+            }
+        });
+        ivAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new PrivateHomeStuffFragment());
+                ft.commit();
+            }
+        });
+
+
         if(auth.getCurrentUser() !=null )
         {
             loggedemail = auth.getCurrentUser().getEmail() ;

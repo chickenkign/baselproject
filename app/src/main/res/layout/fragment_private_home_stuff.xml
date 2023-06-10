@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="409dp"
+        android:layout_height="595dp"
         android:background="#3fff"
         android:gravity="center"
         android:orientation="vertical"
@@ -36,8 +36,8 @@
 
         <EditText
             android:id="@+id/ETDescription"
-            android:layout_width="277dp"
-            android:layout_height="48dp"
+            android:layout_width="276dp"
+            android:layout_height="39dp"
             android:ems="10"
             android:hint="type the description here"
             android:inputType="text" />
@@ -47,7 +47,20 @@
             android:layout_width="258dp"
             android:layout_height="51dp"
             android:text="Done" />
+
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/IVGoBackRealProfile"
+        android:layout_width="71dp"
+        android:layout_height="63dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

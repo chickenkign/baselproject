@@ -1,8 +1,9 @@
-package com.example.baselproject.Useless;
+package com.example.baselproject;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,18 +25,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.baselproject.AddItemFragment;
-import com.example.baselproject.DataXAdapters.HomeStuff;
+import com.example.baselproject.DataXAdapters.ItemChar;
+import com.example.baselproject.DataXAdapters.User;
 import com.example.baselproject.FirebaseStuff.FirebaseServices;
+import com.example.baselproject.Navigator.HomeFragment;
 import com.example.baselproject.Navigator.MainListFragment;
-import com.example.baselproject.R;
+import com.example.baselproject.Recycler.HomeRecyclerFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -45,23 +44,20 @@ import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link PrivateHomeStuffFragment#newInstance} factory method to
+ * Use the {@link AddItemFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PrivateHomeStuffFragment extends Fragment {
-    EditText Description , name ;
-    ImageView iv , GoBack;
-    private FirebaseAuth auth ;
-    String loggedemail ;
-    Button bt ;
-    private FirebaseServices fbs;
-    private final int galerry = 1000;
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private DatabaseReference mDatabase;
-    Uri imageUri;
+public class AddItemFragment extends Fragment {
+    EditText input , output ;
+    ImageView iv , Goback;
+    Button btnInput , btnDone ;
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    private static final int PICK_IMAGE_REQUEST = 1;
+    Uri imageUri;
 
     StorageReference storageRef = storage.getReference();
+    private FirebaseServices fbs;
+    private final int galerry = 1000;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,8 +67,12 @@ public class PrivateHomeStuffFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    String name ;
+    public AddItemFragment(String name) {
+        this.name = name ;
+    }
 
-    public PrivateHomeStuffFragment() {
+    public AddItemFragment() {
         // Required empty public constructor
     }
 
@@ -82,11 +82,11 @@ public class PrivateHomeStuffFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PrivateHomeStuffFragment.
+     * @return A new instance of fragment AddItemFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PrivateHomeStuffFragment newInstance(String param1, String param2) {
-        PrivateHomeStuffFragment fragment = new PrivateHomeStuffFragment();
+    public static AddItemFragment newInstance(String param1, String param2) {
+        AddItemFragment fragment = new AddItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -107,7 +107,7 @@ public class PrivateHomeStuffFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_private_home_stuff, container, false);
+        return inflater.inflate(R.layout.fragment_add_item, container, false);
     }
 
     @Override
@@ -117,31 +117,36 @@ public class PrivateHomeStuffFragment extends Fragment {
     }
 
     private void connectcomponents() {
-        iv = getView().findViewById(R.id.IVHomeChooseImage);
-        Description = getView().findViewById(R.id.ETDescription);
+        input = getView().findViewById(R.id.ETInPut);
+        Goback = getView().findViewById(R.id.IVGoBackAddItem);
+        iv = getView().findViewById(R.id.IVChooseImageItem);
+        btnDone = getView().findViewById(R.id.BTNDoneItem);
         fbs = FirebaseServices.getInstance();
-        bt = getView().findViewById(R.id.BTNHomeDone);
-        GoBack = getView().findViewById(R.id.IVGoBackRealProfile);
-        name = getView().findViewById(R.id.ETNameItem);
-        auth = FirebaseAuth.getInstance() ;
-        loggedemail = auth.getCurrentUser().getEmail() ;
-        bt.setOnClickListener(new View.OnClickListener() {
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+            }
+        });
+        btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Description.getText().toString().trim().isEmpty() || name.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(getActivity(), "fill everything pls", Toast.LENGTH_SHORT).show();
+                if(input.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "ffs type the good stuff", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String path = uploadImageToFirebaseStorage();
                 if (path == null)
                     return;
-                HomeStuff homeStuff = new HomeStuff(name.getText().toString() , Description.getText().toString() , path) ;
-                fbs.getFire().collection("users").document(loggedemail).collection("Home").add(homeStuff).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+
+                ItemChar user = new ItemChar(input.getText().toString() , path);
+                fbs.getFire().collection("ItemChar").document(name).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                    public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.frameLayoutMain, new AddItemFragment(name.getText().toString()));
+                        ft.replace(R.id.frameLayoutMain, new MainListFragment());
                         ft.commit();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -152,15 +157,7 @@ public class PrivateHomeStuffFragment extends Fragment {
                 });
             }
         });
-
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, PICK_IMAGE_REQUEST);
-            }
-        });
-        GoBack.setOnClickListener(new View.OnClickListener() {
+        Goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -169,8 +166,8 @@ public class PrivateHomeStuffFragment extends Fragment {
             }
         });
     }
-
     @Override
+
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
@@ -180,7 +177,6 @@ public class PrivateHomeStuffFragment extends Fragment {
             // Do something with the imageUri, such as upload it to Firebase Storage
         }
     }
-
     private String uploadImageToFirebaseStorage() {
         BitmapDrawable drawable = (BitmapDrawable) iv.getDrawable();
         Bitmap Image = drawable.getBitmap();

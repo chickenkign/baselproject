@@ -17,10 +17,4 @@
         android:title="Profile"
         />
 
-    <item
-        android:id="@+id/NavigatorSignOut"
-        android:icon="@drawable/baseline_logout_24"
-        android:title="Sign Out"
-        />
-
 </menu>
