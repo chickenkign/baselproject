@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class HomeFragment extends Fragment {
     MediaPlayer mp ;
-    ImageView iv , bluetooth , GoProfile;
+    ImageView iv , bluetooth ;
     String email = FirebaseAuth.getInstance().getCurrentUser().getEmail() ;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -88,13 +88,6 @@ public class HomeFragment extends Fragment {
         iv = getView().findViewById(R.id.IVBNTHome);
         final ImageView opendoor = getView().findViewById(R.id.IVOpenDoor);
         bluetooth = getView().findViewById(R.id.IVHomeBluetooth);
-        GoProfile = getView().findViewById(R.id.IVGoToProfile);
-        GoProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Gooback();
-            }
-        });
 
         bluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
