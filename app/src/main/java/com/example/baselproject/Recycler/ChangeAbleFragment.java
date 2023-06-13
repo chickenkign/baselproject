@@ -146,7 +146,7 @@ public class ChangeAbleFragment extends Fragment {
             public void onClick(View v) {
                 if(connectedThread !=null) {
                     String cmdText = null;
-                    cmdText = input;
+                    cmdText = sensor;
                     connectedThread.write(cmdText);
                     play();
                 }else Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
