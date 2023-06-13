@@ -17,11 +17,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.baselproject.ChangeAbleFragment;
 import com.example.baselproject.DataXAdapters.HomeAdapter;
 import com.example.baselproject.DataXAdapters.HomeStuff;
 import com.example.baselproject.DataXAdapters.SelectListener;
-import com.example.baselproject.EveryoneProfileFragment;
 import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
 import com.google.firebase.auth.FirebaseAuth;

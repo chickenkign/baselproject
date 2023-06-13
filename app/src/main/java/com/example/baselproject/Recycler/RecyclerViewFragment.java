@@ -1,12 +1,9 @@
 package com.example.baselproject.Recycler;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +20,7 @@ import android.widget.Toast;
 import com.example.baselproject.DataXAdapters.MyAdapter;
 import com.example.baselproject.DataXAdapters.SelectListener;
 import com.example.baselproject.DataXAdapters.User;
-import com.example.baselproject.EveryoneProfileFragment;
+import com.example.baselproject.FirebaseStuff.EveryoneProfileFragment;
 import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
 import com.google.firebase.firestore.DocumentChange;

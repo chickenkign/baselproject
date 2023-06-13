@@ -1,5 +1,6 @@
 package com.example.baselproject.FirebaseStuff;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,10 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
 import com.example.baselproject.Recycler.RecyclerViewFragment;
-import com.example.baselproject.Useless.PrivateHomeStuffFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,8 +37,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 public class RealProfileFragment extends Fragment {
     private FirebaseAuth auth ;
     private FirebaseFirestore db ;
-    TextView tvemail , tvname , tvphone , tvusers , tvadd , tvlogout;
-    ImageView ivUser , ivAdd , ivLogOut ;
+    TextView tvemail , tvname , tvphone , tvusers , tvadd  , tvcontactus;
+    ImageView ivUser , ivAdd , ivLogOut , contactus;
     String email,name,phone,loggedemail , image ;
     CircularImageView iv ;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -103,9 +102,10 @@ public class RealProfileFragment extends Fragment {
         db = FirebaseFirestore.getInstance() ;
         loggedemail = auth.getCurrentUser().getEmail() ;
         tvusers = getView().findViewById(R.id.TVUsers);
-        tvlogout = getView().findViewById(R.id.TVLogOut);
         tvadd = getView().findViewById(R.id.TVAdd);
         ivAdd = getView().findViewById(R.id.IVAdd);
+        contactus = getView().findViewById(R.id.IVContactUs);
+        tvcontactus = getView().findViewById(R.id.TVContactUs);
         ivUser = getView().findViewById(R.id.IVUsers);
         ivLogOut = getView().findViewById(R.id.IVLogOut);
         tvemail = getView().findViewById(R.id.RealProfileEmail);
@@ -126,16 +126,6 @@ public class RealProfileFragment extends Fragment {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameLayoutMain, new RecyclerViewFragment());
                 ft.commit();
-            }
-        });
-        tvlogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.frameLayoutMain, new LoginFragment());
-                ft.commit();
-
             }
         });
         ivLogOut.setOnClickListener(new View.OnClickListener() {
@@ -207,6 +197,22 @@ public class RealProfileFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(),e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        contactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:0585090180"));
+                startActivity(intent);
+            }
+        });
+        tvcontactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:0585090180"));
+                startActivity(intent);
             }
         });
     }
