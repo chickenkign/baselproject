@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.baselproject.AddItemFragment;
+import com.example.baselproject.FirebaseStuff.AddItemFragment;
 import com.example.baselproject.DataXAdapters.HomeStuff;
 import com.example.baselproject.FirebaseStuff.FirebaseServices;
 import com.example.baselproject.Navigator.MainListFragment;

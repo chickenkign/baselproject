@@ -1,9 +1,8 @@
-package com.example.baselproject;
+package com.example.baselproject.FirebaseStuff;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,11 +25,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.baselproject.DataXAdapters.ItemChar;
-import com.example.baselproject.DataXAdapters.User;
-import com.example.baselproject.FirebaseStuff.FirebaseServices;
-import com.example.baselproject.Navigator.HomeFragment;
 import com.example.baselproject.Navigator.MainListFragment;
-import com.example.baselproject.Recycler.HomeRecyclerFragment;
+import com.example.baselproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

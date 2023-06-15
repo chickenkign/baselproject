@@ -1,4 +1,4 @@
-package com.example.baselproject;
+package com.example.baselproject.FirebaseStuff;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,15 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.baselproject.Navigator.MainListFragment;
+import com.example.baselproject.R;
 import com.example.baselproject.Recycler.HomeRecyclerFragment;
 import com.example.baselproject.Recycler.RecyclerViewFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
