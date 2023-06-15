@@ -41,6 +41,7 @@ public class EveryoneProfileFragment extends Fragment {
     TextView TVemail , TVname , TVphone , visit ;
     ImageView iv , Goback;
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    static int PERMISSION_CODE = 100 ;
     StorageReference storageRef = storage.getReference();
 
     public EveryoneProfileFragment(String email , String name , String phone , String path) {

@@ -58,8 +58,11 @@ public class HomeRecyclerFragment extends Fragment implements SelectListener {
     private String mParam1;
     private String mParam2;
 
-    public HomeRecyclerFragment(String email) {
+    public HomeRecyclerFragment(String email, String input) {
         this.email = email ;
+    }
+    public HomeRecyclerFragment(String input) {
+        this.input = input ;
     }
 
     public HomeRecyclerFragment() {
