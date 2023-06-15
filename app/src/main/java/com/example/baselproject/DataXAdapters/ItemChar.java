@@ -10,6 +10,9 @@ public class ItemChar {
         this.sensor = sensor;
         this.iv = iv;
     }
+    public ItemChar(String iv) {
+        this.iv = iv;
+    }
 
     public String getSensor() {
         return sensor;

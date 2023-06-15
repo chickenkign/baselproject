@@ -50,7 +50,7 @@ import java.util.UUID;
 public class AddItemFragment extends Fragment {
     EditText input , output ;
     ImageView iv , Goback;
-    Button btnInput , btnDone ;
+    Button btnInput , btnDone , btnOutPut;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private static final int PICK_IMAGE_REQUEST = 1;
     Uri imageUri;
@@ -121,7 +121,21 @@ public class AddItemFragment extends Fragment {
         Goback = getView().findViewById(R.id.IVGoBackAddItem);
         iv = getView().findViewById(R.id.IVChooseImageItem);
         btnDone = getView().findViewById(R.id.BTNDoneItem);
+        btnInput = getView().findViewById(R.id.BTNInput);
+        btnOutPut = getView().findViewById(R.id.BTNOutPut);
         fbs = FirebaseServices.getInstance();
+        btnInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                input.setVisibility(View.VISIBLE);
+            }
+        });
+        btnOutPut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                input.setVisibility(View.GONE);
+            }
+        });
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,31 +146,45 @@ public class AddItemFragment extends Fragment {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(input.getText().toString().isEmpty()) {
-                    Toast.makeText(getActivity(), "ffs type the good stuff", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 String path = uploadImageToFirebaseStorage();
                 if (path == null)
                     return;
-
-                ItemChar user = new ItemChar(input.getText().toString() , path);
-                fbs.getFire().collection("ItemChar").document(name).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
-                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.frameLayoutMain, new MainListFragment());
-                        ft.commit();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), "sorry but something went wrong", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                if (input.getText().toString() != null) {
+                    ItemChar user = new ItemChar(input.getText().toString(), path);
+                    fbs.getFire().collection("ItemChar").document(name).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.frameLayoutMain, new MainListFragment());
+                            ft.commit();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), "sorry but something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    ItemChar user = new ItemChar(path);
+                    fbs.getFire().collection("ItemChar").document(name).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.frameLayoutMain, new MainListFragment());
+                            ft.commit();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), "sorry but something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
+
         Goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

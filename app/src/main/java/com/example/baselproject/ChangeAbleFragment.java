@@ -52,7 +52,7 @@ public class ChangeAbleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    String input , path ;
+    String input , path , output ;
 
     public ChangeAbleFragment(String input) {
         this.input = input ;
@@ -107,48 +107,54 @@ public class ChangeAbleFragment extends Fragment {
         iv = getView().findViewById(R.id.IVChangeable);
         GoBack = getView().findViewById(R.id.IVGoBackChangeAble);
         btn = getView().findViewById(R.id.BTNChangeAble);
-        db.collection("ItemChar").document(input).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot != null && documentSnapshot.exists())
-                    {
-                        sensor = documentSnapshot.getString("sensor");
-                        image = documentSnapshot.getString("iv");
-                        StorageReference imageRef = storageRef.child(image);
-                        imageRef.getDownloadUrl()
-                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        // Load the image into an ImageView using Glide or Picasso
-                                        Glide.with(getActivity()).load(uri).into(iv);
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception exception) {
-                                        // Handle any errors that occur during the download
-                                    }
-                                });
+            db.collection("ItemChar").document(input).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot != null && documentSnapshot.exists()) {
+                            sensor = documentSnapshot.getString("sensor");
+                            image = documentSnapshot.getString("iv");
+                            StorageReference imageRef = storageRef.child(image);
+                            imageRef.getDownloadUrl()
+                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            // Load the image into an ImageView using Glide or Picasso
+                                            Glide.with(getActivity()).load(uri).into(iv);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Handle any errors that occur during the download
+                                        }
+                                    });
+                        }
                     }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(),e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(connectedThread !=null) {
+                if(sensor == "")
+                {
+                    play2();
+                    return;
+                }
+                else if(connectedThread !=null) {
                     String cmdText = null;
-                    cmdText = input;
+                    cmdText = sensor;
                     connectedThread.write(cmdText);
                     play();
-                }else Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         GoBack.setOnClickListener(new View.OnClickListener() {
@@ -177,5 +183,11 @@ public class ChangeAbleFragment extends Fragment {
             mp.release();
             mp = null ;
         }
+    }
+    public void play2(){
+        if(connectedThread !=null) {
+            output = connectedThread.getName() ;
+            Toast.makeText(getActivity(), output , Toast.LENGTH_SHORT).show();
+        }else Toast.makeText(getActivity(), output, Toast.LENGTH_SHORT).show();
     }
 }
