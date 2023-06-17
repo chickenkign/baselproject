@@ -1,4 +1,4 @@
-package com.example.baselproject.Useless;
+package com.example.baselproject.FirebaseStuff;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;

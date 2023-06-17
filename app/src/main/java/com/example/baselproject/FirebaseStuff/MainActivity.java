@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.baselproject.R;
+import com.example.baselproject.Recycler.LightFragment;
 
 public class MainActivity extends AppCompatActivity {
 

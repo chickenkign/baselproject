@@ -7,15 +7,19 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
+
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +30,9 @@ import com.example.baselproject.R;
 public class LightFragment extends Fragment {
     ImageView iv ;
     private boolean swich = false ;
+    GifImageView walking ;
+    String cmdText = null;
+    final Handler handler = new Handler();
     MediaPlayer mp ;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -84,40 +91,52 @@ public class LightFragment extends Fragment {
     private void connectcomponents() {
         final Button btn = getView().findViewById(R.id.BTNTurnOnLight);
         iv = getView().findViewById(R.id.IVLightGoBack);
+        walking = getView().findViewById(R.id.walking);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String cmdText = null;
                 String btnState = btn.getText().toString().toLowerCase();
                 if(connectedThread != null) {
                     switch (btnState) {
                         case "turn on":
                             play();
-                            btn.setText("Turn Off");
-                            // Command to turn on LED on Arduino. Must match with the command in Arduino code
-                            cmdText = "n";
-                            if (swich == false)
-                            {
-                                iv.setImageResource(R.drawable.on);
-                                swich = true ;
-                            }
+                            animation();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    btn.setText("Turn Off");
+                                    cmdText = "n";
+                                    if (swich == false) {
+                                        iv.setX(680);
+                                        iv.setImageResource(R.drawable.on);
+                                        swich = true;
+                                    }
+                                }
+                            }, 5800);
                             break;
                         case "turn off":
+
                             play();
-                            btn.setText("Turn On");
-                            // Command to turn off LED on Arduino. Must match with the command in Arduino code
-                            cmdText = "d";
-                            if (swich == true)
-                            {
-                                iv.setImageResource(R.drawable.off);
-                                swich = false ;
-                            }
+                            animation2();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    btn.setText("Turn On");
+                                    cmdText = "d";
+                                    if (swich == true) {
+                                        iv.setX(80);
+                                        iv.setImageResource(R.drawable.off);
+                                        walking.setImageResource(R.drawable.up);
+                                        swich = false;
+                                    }
+                                }
+                            }, 5800);
                             break;
                     }
                     // Send command to Arduino board
                     connectedThread.write(cmdText);
                 } else {
-                    Toast.makeText(getActivity(), "Bluetooth not Connected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -147,5 +166,36 @@ public class LightFragment extends Fragment {
             mp.release();
             mp = null ;
         }
+    }
+    public void animation2()
+    {
+        walking.setImageResource(R.drawable.walking);
+        TranslateAnimation animation = new TranslateAnimation(0.0f, -620.0f,
+                0.0f, 0.0f);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
+        animation.setDuration(6000);  // animation duration
+        walking.startAnimation(animation);
+        iv.startAnimation(animation);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                walking.setX(80);
+            }
+        }, 5800);
+    }
+    public void animation()
+    {
+        walking.setImageResource(R.drawable.walking);
+        TranslateAnimation animation = new TranslateAnimation(0.0f, 620.0f,
+                0.0f, 0.0f);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
+        animation.setDuration(6000);  // animation duration
+        walking.startAnimation(animation);  // start animation
+        iv.startAnimation(animation);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                walking.setImageResource(R.drawable.up);
+                walking.setX(680);
+            }
+        }, 5800);
     }
 }
