@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,8 @@ import com.example.baselproject.R;
 public class TempFragment extends Fragment {
     Button btn ;
     MediaPlayer mp ;
+    public static Handler handler;
+    private final static int MESSAGE_READ = 2;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -103,6 +108,8 @@ public class TempFragment extends Fragment {
             cmdText = "t";
             connectedThread.write(cmdText);
             play();
+            String f = connectedThread.getName();
+            Toast.makeText(getActivity(), f , Toast.LENGTH_SHORT).show();
         }else Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
     }
 

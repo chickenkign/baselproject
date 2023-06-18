@@ -100,6 +100,8 @@ public class LightFragment extends Fragment {
                     switch (btnState) {
                         case "turn on":
                             play();
+                            iv.setX(680);
+                            iv.setImageResource(R.drawable.on);
                             animation();
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -107,16 +109,16 @@ public class LightFragment extends Fragment {
                                     btn.setText("Turn Off");
                                     cmdText = "n";
                                     if (swich == false) {
-                                        iv.setX(680);
-                                        iv.setImageResource(R.drawable.on);
                                         swich = true;
                                     }
                                 }
-                            }, 5800);
+                            }, 5750);
                             break;
                         case "turn off":
 
                             play();
+                            iv.setX(80);
+                            iv.setImageResource(R.drawable.off);
                             animation2();
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -124,19 +126,16 @@ public class LightFragment extends Fragment {
                                     btn.setText("Turn On");
                                     cmdText = "d";
                                     if (swich == true) {
-                                        iv.setX(80);
-                                        iv.setImageResource(R.drawable.off);
                                         walking.setImageResource(R.drawable.up);
                                         swich = false;
                                     }
                                 }
-                            }, 5800);
+                            }, 5700);
                             break;
                     }
-                    // Send command to Arduino board
                     connectedThread.write(cmdText);
-                } else {
-                    Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getActivity(), "Bluetooth not Connected", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -174,13 +173,12 @@ public class LightFragment extends Fragment {
                 0.0f, 0.0f);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
         animation.setDuration(6000);  // animation duration
         walking.startAnimation(animation);
-        iv.startAnimation(animation);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 walking.setX(80);
             }
-        }, 5800);
+        }, 5700);
     }
     public void animation()
     {
@@ -189,13 +187,12 @@ public class LightFragment extends Fragment {
                 0.0f, 0.0f);          //  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
         animation.setDuration(6000);  // animation duration
         walking.startAnimation(animation);  // start animation
-        iv.startAnimation(animation);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 walking.setImageResource(R.drawable.up);
                 walking.setX(680);
             }
-        }, 5800);
+        }, 5750);
     }
 }

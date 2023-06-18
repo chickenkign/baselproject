@@ -126,7 +126,6 @@ public class MainActivity2 extends AppCompatActivity {
                     case MESSAGE_READ:
                         int t;
                         String arduinoMsg = msg.obj.toString(); // Read message from Arduino
-
                         if (arduinoMsg.startsWith("*T"))
                             t = Integer.parseInt(arduinoMsg);
                         else if (arduinoMsg.startsWith("*B"))
