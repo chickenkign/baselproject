@@ -143,7 +143,7 @@ public class ChangeAbleFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sensor == "")
+                if(sensor.equals(""))
                 {
                     play2();
                     return;
@@ -187,8 +187,8 @@ public class ChangeAbleFragment extends Fragment {
     }
     public void play2(){
         if(connectedThread !=null) {
-            output = connectedThread.getName() ;
-            Toast.makeText(getActivity(), output , Toast.LENGTH_SHORT).show();
+            String m = connectedThread.read();
+            Toast.makeText(getActivity(), m , Toast.LENGTH_SHORT).show();
         }else Toast.makeText(getActivity(), output, Toast.LENGTH_SHORT).show();
     }
 }

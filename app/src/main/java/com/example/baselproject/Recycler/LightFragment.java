@@ -108,6 +108,7 @@ public class LightFragment extends Fragment {
                                 public void run() {
                                     btn.setText("Turn Off");
                                     cmdText = "n";
+                                    connectedThread.write(cmdText);
                                     if (swich == false) {
                                         swich = true;
                                     }
@@ -125,6 +126,7 @@ public class LightFragment extends Fragment {
                                 public void run() {
                                     btn.setText("Turn On");
                                     cmdText = "d";
+                                    connectedThread.write(cmdText);
                                     if (swich == true) {
                                         walking.setImageResource(R.drawable.up);
                                         swich = false;
@@ -133,7 +135,6 @@ public class LightFragment extends Fragment {
                             }, 5700);
                             break;
                     }
-                    connectedThread.write(cmdText);
                 }else {
                     Toast.makeText(getActivity(), "Bluetooth not Connected", Toast.LENGTH_SHORT).show();
                 }

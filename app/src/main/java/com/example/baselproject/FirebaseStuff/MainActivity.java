@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.baselproject.R;
 import com.example.baselproject.Recycler.LightFragment;
+import com.example.baselproject.Recycler.TempFragment;
 
 public class MainActivity extends AppCompatActivity {
 

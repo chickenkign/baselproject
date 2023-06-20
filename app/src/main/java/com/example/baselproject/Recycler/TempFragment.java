@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.baselproject.Navigator.MainListFragment;
@@ -29,6 +30,7 @@ import com.example.baselproject.R;
 public class TempFragment extends Fragment {
     Button btn ;
     MediaPlayer mp ;
+    TextView tv ;
     public static Handler handler;
     private final static int MESSAGE_READ = 2;
 
@@ -89,6 +91,8 @@ public class TempFragment extends Fragment {
         final ImageView iv ;
         iv = getView().findViewById(R.id.IVTemp);
         btn = getView().findViewById(R.id.BTNReturn);
+        tv = getView().findViewById(R.id.TVTemp);
+        tv.setVisibility(View.INVISIBLE);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,8 +112,9 @@ public class TempFragment extends Fragment {
             cmdText = "t";
             connectedThread.write(cmdText);
             play();
-            String f = connectedThread.getName();
-            Toast.makeText(getActivity(), f , Toast.LENGTH_SHORT).show();
+            String s =connectedThread.read();
+            tv.setText(s);
+            tv.setVisibility(View.VISIBLE);
         }else Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
     }
 

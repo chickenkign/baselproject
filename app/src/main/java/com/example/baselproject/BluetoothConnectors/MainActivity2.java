@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.io.IOException;
@@ -277,7 +278,7 @@ public class MainActivity2 extends AppCompatActivity {
                     String readMessage;
                     if (buffer[bytes] == '\n'){
                         readMessage = new String(buffer,0,bytes);
-                        Log.e("Arduino Message",readMessage);
+                        Log.d("Arduino Message",readMessage);
                         handler.obtainMessage(MESSAGE_READ,readMessage).sendToTarget();
                         bytes = 0;
                     } else {
@@ -290,6 +291,16 @@ public class MainActivity2 extends AppCompatActivity {
             }
         }
 
+        public String read() {
+            String m = "didnt work";
+            try {
+                 m = String.valueOf(mmInStream.read());
+            } catch (IOException e) {
+                Log.e("Send Error","Unable to send message",e);
+            }
+            return m ;
+        }
+
         /* Call this from the main activity to send data to the remote device */
         public void write(String input) {
             byte[] bytes = input.getBytes(); //converts entered String into bytes
@@ -299,6 +310,7 @@ public class MainActivity2 extends AppCompatActivity {
                 Log.e("Send Error","Unable to send message",e);
             }
         }
+
 
         /* Call this from the main activity to shutdown the connection */
         public void cancel() {
