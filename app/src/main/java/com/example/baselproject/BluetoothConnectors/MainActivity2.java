@@ -267,6 +267,7 @@ public class MainActivity2 extends AppCompatActivity {
         public void run() {
             byte[] buffer = new byte[1024];  // buffer store for the stream
             int bytes = 0; // bytes returned from read()
+            String readMessage = "";
             // Keep listening to the InputStream until an exception occurs
             while (true) {
                 try {
@@ -275,7 +276,6 @@ public class MainActivity2 extends AppCompatActivity {
                     Then send the whole String message to GUI Handler.
                      */
                     buffer[bytes] = (byte) mmInStream.read();
-                    String readMessage;
                     if (buffer[bytes] == '\n'){
                         readMessage = new String(buffer,0,bytes);
                         Log.d("Arduino Message",readMessage);

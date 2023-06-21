@@ -8,15 +8,19 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
+
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +30,8 @@ import com.example.baselproject.R;
 public class DoorFragment extends Fragment {
     Button btn ;
     MediaPlayer mp;
-
+    GifImageView iv;
+    final Handler handler = new Handler();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -80,7 +85,6 @@ public class DoorFragment extends Fragment {
     }
 
     private void connectcomponents() {
-        final ImageView iv;
         iv = getView().findViewById(R.id.IVDoor);
         btn = getView().findViewById(R.id.BTNReturnDoor);
         iv.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +105,15 @@ public class DoorFragment extends Fragment {
         if(connectedThread !=null) {
             String cmdText = null;
             cmdText = "o";
+            iv.setImageResource(R.drawable.doorend);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    iv.setImageResource(R.drawable.door);
+                }
+            }, 8500);
+
+
             connectedThread.write(cmdText);
             play();
         }else Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
@@ -129,4 +142,5 @@ public class DoorFragment extends Fragment {
             mp = null ;
         }
     }
+
 }
