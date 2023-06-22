@@ -206,6 +206,7 @@ public class ProfileFragment extends Fragment {
         HomeStuff lights = new HomeStuff("In home Lights" , "just click here so you can turn on / off in house Lights any time you want" , "/listingPictures/24f6753d-a6cf-4f86-b197-2420c395eee1");
         HomeStuff song = new HomeStuff("christmas song" , "click here any time you like to play the christmas song" , "/listingPictures/230af05e-db08-4b2c-9d36-b420ef66b833");
         HomeStuff door = new HomeStuff("Door" , "click here to open the door any time you want" , "/listingPictures/fbbf63c1-4982-4069-b903-93c8e8866957");
+        HomeStuff reset = new HomeStuff("reset" , "visit this page if the sensors stucked" , "/listingPictures/75748a2a-4b88-4e40-b4a5-23d5216e2f0f");
         fbs.getFire().collection("users").document(TheEmail).collection("Home").add(rgb).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -251,6 +252,17 @@ public class ProfileFragment extends Fragment {
             }
         });
         fbs.getFire().collection("users").document(TheEmail).collection("Home").add(door).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(reset).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
 

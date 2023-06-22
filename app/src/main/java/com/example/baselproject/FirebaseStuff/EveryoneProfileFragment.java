@@ -113,7 +113,7 @@ public class EveryoneProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.frameLayoutMain, new HomeRecyclerFragment(email));
+                ft.replace(R.id.frameLayoutMain, new HomeRecyclerFragment(email , ""));
                 ft.commit();
             }
         });

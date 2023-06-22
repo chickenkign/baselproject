@@ -81,8 +81,8 @@
 
             <ImageView
                 android:id="@+id/IVHomeItem"
-                android:layout_width="151dp"
-                android:layout_height="211dp"
+                android:layout_width="119dp"
+                android:layout_height="215dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

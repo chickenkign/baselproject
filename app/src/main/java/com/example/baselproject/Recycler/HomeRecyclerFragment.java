@@ -209,7 +209,13 @@ public class HomeRecyclerFragment extends Fragment implements SelectListener {
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frameLayoutMain, new christmasTreeFragment());
                     ft.commit();
-                }else if (f.equals(m)){
+                }else if (f.equals("reset")){
+                    Toast.makeText(getActivity(), "welcome to Reset fragment", Toast.LENGTH_SHORT).show();
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frameLayoutMain, new ResetFragment());
+                    ft.commit();
+                }
+                else if (f.equals(m)){
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.frameLayoutMain, new ChangeAbleFragment(input));
                     ft.commit();
