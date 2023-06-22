@@ -6,13 +6,16 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.baselproject.Navigator.MainListFragment;
 import com.example.baselproject.R;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -25,6 +28,7 @@ import pl.droidsonroids.gif.GifImageView;
 public class ResetFragment extends Fragment {
     Button btn ;
     GifImageView iv ;
+    ImageView back ;
 
     MediaPlayer mp ;
     // TODO: Rename parameter arguments, choose names that match
@@ -81,8 +85,15 @@ public class ResetFragment extends Fragment {
     }
 
     private void connectcomponents() {
+        back =getView().findViewById(R.id.IVBackReset);
         btn = getView().findViewById(R.id.BTNReset);
         iv = getView().findViewById(R.id.gifReset);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Goback();
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,5 +128,10 @@ public class ResetFragment extends Fragment {
             mp.release();
             mp = null ;
         }
+    }
+    public void Goback() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayoutMain, new MainListFragment());
+        ft.commit();
     }
 }

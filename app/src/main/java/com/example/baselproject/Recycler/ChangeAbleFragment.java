@@ -187,8 +187,8 @@ public class ChangeAbleFragment extends Fragment {
     }
     public void play2(){
         if(connectedThread !=null) {
-            String m = connectedThread.read();
-            Toast.makeText(getActivity(), m , Toast.LENGTH_SHORT).show();
+            String message = connectedThread.read();
+            Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
         }else Toast.makeText(getActivity(), output, Toast.LENGTH_SHORT).show();
     }
 }

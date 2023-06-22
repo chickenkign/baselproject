@@ -112,8 +112,8 @@ public class TempFragment extends Fragment {
             cmdText = "t";
             connectedThread.write(cmdText);
             play();
-            String s = connectedThread.read();
-            tv.setText(s);
+            String message = connectedThread.read();
+            tv.setText(message);
             tv.setVisibility(View.VISIBLE);
         }else Toast.makeText(getActivity(), "Bluetooth not connected", Toast.LENGTH_SHORT).show();
     }

@@ -294,7 +294,7 @@ public class MainActivity2 extends AppCompatActivity {
         public String read() {
             String m = "didnt work";
             try {
-                 m = String.valueOf(mmInStream.read());
+                m = String.valueOf(mmInStream.read());
             } catch (IOException e) {
                 Log.e("Send Error","Unable to send message",e);
             }
