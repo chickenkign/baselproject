@@ -136,9 +136,9 @@ public class PrivateHomeStuffFragment extends Fragment {
                 if (path == null)
                     return;
                 HomeStuff homeStuff = new HomeStuff(name.getText().toString() , Description.getText().toString() , path) ;
-                fbs.getFire().collection("users").document(loggedemail).collection("Home").add(homeStuff).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                fbs.getFire().collection("users").document(loggedemail).collection("Home").document(name.getText().toString()).set(homeStuff).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                    public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(getActivity(), "done my friendo", Toast.LENGTH_SHORT).show();
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frameLayoutMain, new AddItemFragment(name.getText().toString()));

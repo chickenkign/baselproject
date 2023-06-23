@@ -37,8 +37,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 public class RealProfileFragment extends Fragment {
     private FirebaseAuth auth ;
     private FirebaseFirestore db ;
-    TextView tvemail , tvname , tvphone , tvusers , tvadd  , tvcontactus;
-    ImageView ivUser , ivAdd , ivLogOut , contactus;
+    TextView tvemail , tvname , tvphone , tvusers , tvadd  , tvcontactus , tvdelete;
+    ImageView ivUser , ivAdd , ivLogOut , contactus , delete;
     String email,name,phone,loggedemail , image ;
     CircularImageView iv ;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -111,12 +111,30 @@ public class RealProfileFragment extends Fragment {
         tvemail = getView().findViewById(R.id.RealProfileEmail);
         tvname = getView().findViewById(R.id.RealProfileUsername);
         tvphone = getView().findViewById(R.id.RealProfilePhone);
+        tvdelete = getView().findViewById(R.id.TVDelete);
+        delete = getView().findViewById(R.id.IVDelete);
         iv = getView().findViewById(R.id.RealProfileIV);
         ivUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.frameLayoutMain, new RecyclerViewFragment());
+                ft.commit();
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new DeleteSensorFragment());
+                ft.commit();
+            }
+        });
+        tvdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.frameLayoutMain, new DeleteSensorFragment());
                 ft.commit();
             }
         });

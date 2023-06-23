@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import pl.droidsonroids.gif.GifImageView;
 public class ResetFragment extends Fragment {
     Button btn ;
     GifImageView iv ;
+    final Handler handler = new Handler();
     ImageView back ;
 
     MediaPlayer mp ;
@@ -104,6 +106,12 @@ public class ResetFragment extends Fragment {
     public void Rest()
     {
         if(connectedThread !=null) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    iv.setImageResource(R.drawable.reset);;
+                }
+            }, 3320);
             iv.setImageResource(R.drawable.resetbutton);
             String cmdText = null;
             cmdText = "l";

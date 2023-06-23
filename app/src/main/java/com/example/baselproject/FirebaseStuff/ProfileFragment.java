@@ -207,9 +207,9 @@ public class ProfileFragment extends Fragment {
         HomeStuff song = new HomeStuff("christmas song" , "click here any time you like to play the christmas song" , "/listingPictures/230af05e-db08-4b2c-9d36-b420ef66b833");
         HomeStuff door = new HomeStuff("Door" , "click here to open the door any time you want" , "/listingPictures/fbbf63c1-4982-4069-b903-93c8e8866957");
         HomeStuff reset = new HomeStuff("reset" , "visit this page if the sensors stucked" , "/listingPictures/75748a2a-4b88-4e40-b4a5-23d5216e2f0f");
-        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(rgb).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").document("rgb").set(rgb).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
+            public void onComplete(@NonNull Task<Void> task) {
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -218,9 +218,9 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(temp).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").document("temp").set(temp).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
+            public void onComplete(@NonNull Task<Void> task) {
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -229,9 +229,9 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(lights).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").document("lights").set(lights).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
+            public void onComplete(@NonNull Task<Void> task) {
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -240,9 +240,9 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(song).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").document("christmas song").set(song).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
+            public void onComplete(@NonNull Task<Void> task) {
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -251,9 +251,9 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(door).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").document("Door").set(door).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
+            public void onComplete(@NonNull Task<Void> task) {
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -262,9 +262,9 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-        fbs.getFire().collection("users").document(TheEmail).collection("Home").add(reset).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        fbs.getFire().collection("users").document(TheEmail).collection("Home").document("reset").set(reset).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
+            public void onComplete(@NonNull Task<Void> task) {
 
             }
         }).addOnFailureListener(new OnFailureListener() {
